@@ -14,3 +14,17 @@ class External_DB {
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	}
+  
+  function getTable($name) {
+    $exec = $this->pdo->prepare("SELECT * FROM $name;");
+    $exec->execute();
+    return $exec->fetchAll();
+  }
+  
+  function parseTable($text) {
+    preg_match('/__TABELA_(.*)__/', $text, $matches);
+    if (count($matches) >= 2) {
+      return preg_replace('/(__TABELA_(.*)__)/', 'AQUI VAI A TABELA (' . $matches[1] . ')', $text);
+    }
+  }
+}

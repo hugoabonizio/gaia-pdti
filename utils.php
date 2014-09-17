@@ -1,5 +1,6 @@
 <?php
 class Utils {
+  
 	static function getImageBase64($url) {
 		$ch = curl_init($url);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1) ;
@@ -21,4 +22,5 @@ class Utils {
 		curl_close($ch);
 		return $content;
 	}
+  
 }

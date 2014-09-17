@@ -40,10 +40,11 @@ $app->get('/:page', function ($page) use ($app) {
       'visao' => ['visao', 'Visão'],
       'objetivos' => ['objetivos', 'Objetivos Estratégicos de TIC'],
       'redes' => ['redes', 'Redes de Comunicação de Dados'],
+      'servidores' => ['servidores', 'Servidores'],
     ];
     echo $page;
     if (in_array($page, array('descricao', 'organizacional', 'metodologia', 'missao', 'visao',
-                             'objetivos', 'redes'))) {
+                             'objetivos', 'redes', 'servidores'))) {
       $app->render('simple_field.php', array('rows' => $db->loadInfos(INSTITUICAO_ID),
                                          'page' => $page_info[$page]));
     } elseif (in_array($page, array('matriz', 'options'))) {

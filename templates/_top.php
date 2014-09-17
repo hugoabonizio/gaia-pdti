@@ -96,6 +96,7 @@
                 <div id="collapse2" class="panel-collapse">
                   <div class="panel-body">
                     <li><a href="<?= link_to('redes'); ?>">Redes de Comunicação</a></li>
+                    <li><a href="<?= link_to('servidores'); ?>">Servidores</a></li>
                   </div>
                 </div>
               </div>

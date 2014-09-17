@@ -4,7 +4,9 @@ require_once('lib/tcpdf/tcpdf.php');
 
 require_once 'utils.php';
 require_once 'database.php';
-$db = new DB;
+require_once 'external_database.php';
+$db = new DB();
+$edb = new External_DB();
 $infos = $db->loadInfos(1);
 
 
@@ -206,17 +208,25 @@ $html = '
 			</tr>
 		</table>
 	<br/>
+  
+  <h3>3	Infraestrutura de TIC da Prefeitura</h3>
+	<h3>3.3 Servidores</h3>
+	' . $edb->parseTable($infos['servidores']) . '
+	<br/>
+  
 </div>
 ';
 
-$pdf->writeHTML($html,  true, false, true, false, '');
+echo $html;
+
+$pdf->writeHTML($html, true, false, true, false, '');
 $pdf->lastPage();
 
 
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('example_002.pdf', 'I');
+//$pdf->Output('example_002.pdf', 'I');
 
 //============================================================+
 // END OF FILE
