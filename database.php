@@ -27,7 +27,7 @@ class DB {
 
 	function update_attributes($id, $attributes) {
 		foreach ($attributes as $attr => $value) {
-			$sql = "UPDATE infos SET info_value = '" . $value . "' WHERE info_attr = '" . $attr . "' AND instituicao_id = $id;";
+			$sql = "UPDATE infos SET info_value = '" . htmlentities($value) . "' WHERE info_attr = '" . $attr . "' AND instituicao_id = $id;";
       echo $sql;
       $stmt = $this->pdo->prepare($sql)->execute();
       if (!$stmt) {

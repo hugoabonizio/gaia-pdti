@@ -6,7 +6,8 @@ class External_DB {
 
 	function __construct() {
 		if (true) {
-			$conn = "pgsql:host=ec2-54-243-51-102.compute-1.amazonaws.com port=5432 user=niurpsxchwaumk password=-zrbVb1_ozeW873MspuU7QnDu3 dbname=dfsfks92h7no6h";
+			//$conn = "pgsql:host=ec2-54-243-51-102.compute-1.amazonaws.com port=5432 user=niurpsxchwaumk password=-zrbVb1_ozeW873MspuU7QnDu3 dbname=dfsfks92h7no6h";
+      $conn = "pgsql:host=ec2-54-243-51-102.compute-1.amazonaws.com port=5432 user=niurpsxchwaumk password=-zrbVb1_ozeW873MspuU7QnDu3 dbname=dfsfks92h7no6h";
 		} else {
 			$conn = "sqlite:db/database.sqlite3";
 		}
@@ -24,7 +25,30 @@ class External_DB {
   function parseTable($text) {
     preg_match('/__TABELA_(.*)__/', $text, $matches);
     if (count($matches) >= 2) {
-      return preg_replace('/(__TABELA_(.*)__)/', 'AQUI VAI A TABELA (' . $matches[1] . ')', $text);
+      $results = $this->getTable($matches[1]);
+      $return = '<table border="1" style="border: 2px solid black;" cellpadding="2" cellspacing="2"><tr>';
+      // HEADERS
+      foreach ($results[0] as $key=>$value) {
+        if (!is_numeric($key)) {
+          $return .= "<th style=\"background: gray; font-weight: bold;\">$key</th>";
+        }
+      }
+      $return .= "</tr>";
+      // ITEMS
+      foreach ($results as $result) {
+        $return .= "<tr>";
+        foreach ($result as $key=>$value) {
+          if (!is_numeric($key)) {
+            $return .= "<td>$value</td>";
+          }
+        }
+        $return .= "</tr>";
+      }
+      
+      $return .= "</table>";
+      
+      //return preg_replace('/(__TABELA_(.*)__)/', 'AQUI VAI A TABELA (' . $matches[1] . ')', $text);
+      return preg_replace('/(__TABELA_(.*)__)/', $return, $text);
     }
   }
 }

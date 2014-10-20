@@ -7,16 +7,16 @@
   <h1 class="page-header">Matriz SWOT</h1>
 
   <h3 class="page-header">Pontos Fortes</h3>
-  <textarea style="width: 810px; height: 100px" id="swot_pforte"><?= $rows['swot_pforte']; ?></textarea>
+  <textarea style="width: 100%; height: 100px" id="swot_pforte"><?= $rows['swot_pforte']; ?></textarea>
 
   <h3 class="page-header">Pontos Fracos</h3>
-  <textarea style="width: 810px; height: 100px" id="swot_pfraco"><?= $rows['swot_pfraco']; ?></textarea>
+  <textarea style="width: 100%; height: 100px" id="swot_pfraco"><?= $rows['swot_pfraco']; ?></textarea>
 
   <h3 class="page-header">Oportunidades</h3>
-  <textarea style="width: 810px; height: 100px" id="swot_oportunidades"><?= $rows['swot_oportunidades']; ?></textarea>
+  <textarea style="width: 100%; height: 100px" id="swot_oportunidades"><?= $rows['swot_oportunidades']; ?></textarea>
 
   <h3 class="page-header">Ameaças</h3>
-  <textarea style="width: 810px; height: 100px" id="swot_ameacas"><?= $rows['swot_ameacas']; ?></textarea>
+  <textarea style="width: 100%; height: 100px" id="swot_ameacas"><?= $rows['swot_ameacas']; ?></textarea>
 </div>
 
 

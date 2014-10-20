@@ -156,7 +156,7 @@ $pdf->lastPage();
 
 
 
-$pdf->setPrintHeader(true);
+//$pdf->setPrintHeader(true);
 
 //---------------------------
 
@@ -169,10 +169,10 @@ $html = '
   <h3>1 Introdução</h3>
 	<h3>1.1 Descrição sucinta do Município</h3>
 	' . $infos['descricao'] . '
-	<br/>
+	<br>
   <h3>1.2 Estrutura Organizacional da Secretaria de Tecnologia da Informação</h3>
 	' . $infos['organizacional'] . '
-	<br/>
+	<br>
   <h3>1.3 Metodologia de Trabalho</h3>
 	' . $infos['metodologia'] . '
 	<br/>
@@ -181,13 +181,13 @@ $html = '
 	<h3>2 Referencial Estratégico de TI</h3>
 	<h3>2.1 Missão</h3>
 	' . $infos['missao'] . '
-	<br/>
+	<br>
 	<h3>2.2 Visão</h3>
 	' . $infos['visao'] . '
-	<br/>
+	<br>
 	<h3>2.3 Objetivos Estratégicos de TIC</h3>
 	' . $infos['objetivos'] . '
-	<br/>
+	<br>
 	<h3>2.4 Matriz SWOT da área de TIC</h3>
 		<table border="1" style="border: 2px solid black;" cellpadding="2" cellspacing="2">
 			<tr style="background-color: #ccc; font-weight: bold;">
@@ -207,17 +207,17 @@ $html = '
 				<td>' . $infos['swot_ameacas'] . '</td>
 			</tr>
 		</table>
-	<br/>
+	<br>
   
   <h3>3	Infraestrutura de TIC da Prefeitura</h3>
 	<h3>3.3 Servidores</h3>
 	' . $edb->parseTable($infos['servidores']) . '
-	<br/>
+	<br>
   
 </div>
 ';
 
-echo $html;
+//echo $html;
 
 $pdf->writeHTML($html, true, false, true, false, '');
 $pdf->lastPage();
@@ -226,7 +226,7 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-//$pdf->Output('example_002.pdf', 'I');
+$pdf->Output('example_002.pdf', 'I');
 
 //============================================================+
 // END OF FILE
