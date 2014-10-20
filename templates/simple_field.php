@@ -5,7 +5,7 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header"><?= $page[1]; ?></h1>
-  <textarea class="textarea" style="width: 100%; height: 200px" id="<?= $page[0]; ?>"><?= $rows[$page[0]]; ?></textarea>
+  <textarea class="textarea" style="width: 100%; height: 40%;" id="<?= $page[0]; ?>"><?= $rows[$page[0]]; ?></textarea>
 </div>
 
 
