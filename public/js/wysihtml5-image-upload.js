@@ -90,6 +90,8 @@
 									'<input id="fileupload" type="file" name="files[]" data-url="../UploadHandler.php" multiple>' +
 								'</span>' +
 							'</p>' +
+              '<input type="number" id="photo_widht" placeholder="Largura">' +
+              '<input type="number" id="photo_height" placeholder="Altura">' +
 							'<div id="progress" class="progress progress-striped">' +
 								'<div class="progress-bar"></div>' +
 							'</div>' +
@@ -268,7 +270,14 @@
 				$('#files img').each(function() {
 					var url = $(this).data('url');
 					if (url) {
-						self.editor.composer.commands.exec("insertImage", url);
+            var insertParameters = {src: url};
+            if ($('#photo_widht').val() != "") {
+              insertParameters['width'] = $('#photo_widht').val();
+            }
+            if ($('#photo_height').val() != "") {
+              insertParameters['height'] = $('#photo_height').val();
+            }
+            self.editor.composer.commands.exec("insertImage", insertParameters);
 					}
 				});
 
@@ -335,6 +344,9 @@
 										$('#filealerts').append($('<div class="alert alert-danger"></div>').text('The file “' + file.name + '” could not be stored (' + file.error + ').'));
 									} else {
 										var newimg = $('<img/>').attr('src', file.thumbnailUrl).data('url', file.url).attr('class', 'img-thumbnail');
+                    
+                    
+                    
 										var removebtn = $('<button type="button" class="close">×</button>').click(function() {
 											$(this).parent().remove();
 											updateInsertBtn();
