@@ -10,9 +10,11 @@ class DB {
 		} else {
 			$conn = "sqlite:db/database.sqlite3";
 		}
+    
 		$this->pdo = new PDO($conn);
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
 	}
 
 	function loadInfos($id) {
