@@ -6,15 +6,18 @@ class DB {
 
 	function __construct() {
 		if (true) {
-			$conn = "pgsql:host=ec2-174-129-197-200.compute-1.amazonaws.com port=5432 user=ldphxungmtlhvu password=te9bZEW2Xhemc8EDFsMQ3VbhZt dbname=dfi2fr0b3mm56t";
+			//$conn = "pgsql:host=ec2-174-129-197-200.compute-1.amazonaws.com port=5432 user=ldphxungmtlhvu password=te9bZEW2Xhemc8EDFsMQ3VbhZt dbname=dfi2fr0b3mm56t";
+      $host = gethostbyname('ec2-174-129-197-200.compute-1.amazonaws.com');
+      $conn = "pgsql:host=$host port=5432 dbname=dfi2fr0b3mm56t";
 		} else {
 			$conn = "sqlite:db/database.sqlite3";
 		}
-    
-		$this->pdo = new PDO($conn);
+    $s = microtime(true);
+		$this->pdo = new PDO($conn, 'ldphxungmtlhvu', 'te9bZEW2Xhemc8EDFsMQ3VbhZt');
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-
+    $e = microtime(true);
+    echo $e - $s;
 	}
 
 	function loadInfos($id) {

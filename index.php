@@ -1,5 +1,7 @@
 <?php
 
+$times = [];
+
 require 'vendor/autoload.php';
 
 define('INSTITUICAO_ID', 1);
@@ -7,6 +9,8 @@ define('INSTITUICAO_ID', 1);
 #require 'lib/MPDF57/mpdf.php';
 require 'database.php';
 require 'helpers.php';
+
+
 
 /*$db = new DB();
 $db->create();*/
@@ -80,5 +84,6 @@ $app->post('/options', function () use ($app) {
 $app->get('/hello/:name', function ($name) {
     echo "Hello, $name";
 });
+
 
 $app->run();
