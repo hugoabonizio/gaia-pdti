@@ -10,6 +10,9 @@ define('INSTITUICAO_ID', 1);
 require 'database.php';
 require 'helpers.php';
 
+require 'models/organ.php';
+require 'models/meeting.php';
+
 
 
 /*$db = new DB();
@@ -28,6 +31,73 @@ $app->get('/', function () use ($app) {
 $app->get('/update', function () use ($app) {
 	$db = new DB();
 	$db->update_attributes(INSTITUICAO_ID, $app->request->get());
+});
+
+$app->group('/organs', function () use ($app) {
+  $app->get('/', function () use ($app) {
+    $o = new Organ((new DB())->pdo);
+    $app->render('organs.php', array('organs' => $o->all()));
+  });
+
+  $app->post('/', function () use ($app) {
+    $o = new Organ((new DB())->pdo);
+    $o->create($app->request->post());
+    print_r($app->request->post());
+    $app->redirect(link_to('organs'));
+  });
+
+  $app->get('/delete', function () use ($app) {
+    $o = new Organ((new DB())->pdo);
+    $o->delete($app->request->get('id'));
+    $app->redirect(link_to('organs'));
+  });
+
+  $app->get('/new', function () use ($app) {
+    $app->render('new_organ.php');
+  });
+});
+
+$app->group('/meetings', function () use ($app) {
+  $app->get('/', function () use ($app) {
+    $m = new Meeting();
+    $app->render('meetings.php', array('meetings' => $m->all()));
+  });
+  
+  $app->post('/', function () use ($app) {
+    $m = new Meeting((new DB())->pdo);
+    $params = $app->request->post();
+    if ($params['action'] == "create") {
+      $m->create($params);
+    } elseif ($params['action'] == "update") {
+      $m->update($params['id'], $params);
+    }
+    $app->render('meetings.php', array('meetings' => $m->all()));
+  });
+  
+  $app->get('/new', function () use ($app) {
+    error_reporting(E_ERROR|E_WARNING);
+    $o = new Organ();
+    $app->render('meeting.php', array(
+      'action' => 'create',
+      'organs' => $o->all(),
+      'infos' => array()
+    ));
+  });
+  
+  $app->get('/edit/:id', function ($id) use ($app) {
+    $o = new Organ();
+    $app->render('meeting.php', array(
+      'action' => 'update',
+      'organs' => $o->all(),
+      'infos' => (new Meeting())->find($id)
+    ));
+  });
+  
+  $app->get('/delete', function () use ($app) {
+    $o = new Meeting();
+    $o->delete($app->request->get('id'));
+    $app->redirect(link_to('meetings'));
+  });
 });
 
 
@@ -56,6 +126,7 @@ $app->get('/:page', function ($page) use ($app) {
     }
 	//}
 });
+
 
 $app->post('/options', function () use ($app) {
 	if (!empty($_FILES)) {

@@ -2,7 +2,7 @@
 
 class DB {
 
-	private $pdo;
+	public $pdo;
 
 	function __construct() {
 		if (true) {
@@ -17,7 +17,7 @@ class DB {
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $e = microtime(true);
-    echo $e - $s;
+    //echo $e - $s;
 	}
 
 	function loadInfos($id) {
@@ -32,7 +32,7 @@ class DB {
 
 	function update_attributes($id, $attributes) {
 		foreach ($attributes as $attr => $value) {
-			$sql = "UPDATE infos SET info_value = '" . htmlentities($value) . "' WHERE info_attr = '" . $attr . "' AND instituicao_id = $id;";
+			$sql = "UPDATE infos SET info_value = '" . $value . "' WHERE info_attr = '" . $attr . "' AND instituicao_id = $id;";
       echo $sql;
       $stmt = $this->pdo->prepare($sql)->execute();
       if (!$stmt) {

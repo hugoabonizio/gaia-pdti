@@ -5,9 +5,20 @@ require_once('lib/tcpdf/tcpdf.php');
 require_once 'utils.php';
 require_once 'database.php';
 require_once 'external_database.php';
+require 'models/organ.php';
+require 'models/meeting.php';
+
 $db = new DB();
 $edb = new External_DB();
 $infos = $db->loadInfos(1);
+
+$meetings = new Meeting($db->pdo);
+
+$organ = new Organ($db->pdo);
+$organs = array();
+foreach ($organ->all() as $o) {
+  $organs[$o['id']] = $o['name'];
+}
 
 
 //customizing the footer/header
@@ -71,7 +82,7 @@ if (@file_exists(dirname(__FILE__).'/lib/tcpdf/lang/eng.php')) {
 
 // set font
 // $pdf->SetFont('times', 'BI', 20);
-$pdf->SetFont('dejavusans', '', 14);
+$pdf->SetFont('dejavusans', '', 12);
 
 // add a page
 $pdf->AddPage();
@@ -212,8 +223,53 @@ $html = '
   <h3>3	Infraestrutura de TIC da Prefeitura</h3>
 	<h3>3.3 Servidores</h3>
 	' . $edb->parseTable($infos['servidores']) . '
-	<br>
-  
+	<br><br><br>
+';
+
+$pdf->writeHTML($html, true, false, true, false, '');
+$pdf->AddPage();
+
+
+
+$html = '
+  <h3>4 Reuniões</h3>
+';
+
+foreach ($meetings->all() as $m) {
+  $html .= '<table border="1" style="border: 2px solid black;">
+  <tr style="background-color: rgb(209, 237, 174); font-weight: bold;">
+    <td colspan="2" style="text-align: center;">' . $organs[$m['organ_id']] . '</td>
+  </tr>
+  <tr>
+    <td width="20%" style="text-decoration: underline; font-weight: bold;">Data da reunião</td>
+    <td width="80%">' . $m['m_date'] . '</td>
+  </tr>
+  <tr>
+    <td style="text-decoration: underline; font-weight: bold;">Participantes</td>
+    <td>' . $m['participants'] . '</td>
+  </tr>
+  <tr>
+    <td style="text-decoration: underline; font-weight: bold;">Sistemas</td>
+    <td>' . $m['systems'] . '</td>
+  </tr>
+  <tr>
+    <td style="text-decoration: underline; font-weight: bold;">Infraestrutura</td>
+    <td>' . $m['infra'] . '</td>
+  </tr>
+  <tr>
+    <td style="text-decoration: underline; font-weight: bold;">Processos</td>
+    <td>' . $m['processes'] . '</td>
+  </tr>
+  <tr>
+    <td style="text-decoration: underline; font-weight: bold;">Pessoas</td>
+    <td>' . $m['people'] . '</td>
+  </tr>
+  </table><br><br><br>';
+      
+}
+      
+      
+$html .= '
 </div>
 ';
 

@@ -16,26 +16,26 @@
   <div class="tab-content" class="tab-content">
     <div class="tab-pane active" id="fortes">
       <h3 class="page-header">Pontos Fortes</h3>
-      <textarea style="width: 100%; height: 40%;" id="swot_pforte"><?= $rows['swot_pforte']; ?></textarea>
+      <textarea class="textarea" style="width: 100%; height: 40%;" id="swot_pforte"><?= $rows['swot_pforte']; ?></textarea>
     </div>
 
     <div class="tab-pane" id="fracos">
       <h3 class="page-header">Pontos Fracos</h3>
-      <textarea style="width: 100%; height: 40%;" id="swot_pfraco"><?= $rows['swot_pfraco']; ?></textarea>
+      <textarea class="textarea" style="width: 100%; height: 40%;" id="swot_pfraco"><?= $rows['swot_pfraco']; ?></textarea>
     </div>
 
     <div class="tab-pane" id="oportunidades">
       <h3 class="page-header">Oportunidades</h3>
-      <textarea style="width: 100%; height: 40%;" id="swot_oportunidades"><?= $rows['swot_oportunidades']; ?></textarea>
+      <textarea class="textarea" style="width: 100%; height: 40%;" id="swot_oportunidades"><?= $rows['swot_oportunidades']; ?></textarea>
     </div>
 
     <div class="tab-pane" id="ameacas">
       <h3 class="page-header">Ameaças</h3>
-      <textarea style="width: 100%; height: 40%;" id="swot_ameacas"><?= $rows['swot_ameacas']; ?></textarea>
+      <textarea class="textarea" style="width: 100%; height: 40%;" id="swot_ameacas"><?= $rows['swot_ameacas']; ?></textarea>
     </div>
   </div>
 </div>
 
 
 
-<?php include '_bottom.php'; ?>
+<?php include '_bottom_save.php'; ?>

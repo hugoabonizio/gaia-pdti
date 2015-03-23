@@ -31,7 +31,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?= link_to('options'); ?>"><i class="glyphicon glyphicon-plus"></i> Reuniões</a></li>
+            <li><a href="<?= link_to('meetings'); ?>"><i class="glyphicon glyphicon-plus"></i> Reuniões</a></li>
             <li><a href="<?= link_to('options'); ?>"><i class="glyphicon glyphicon-align-justify"></i> Opções</a></li>
             <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Ajuda</a></li>
             <li><a href="#"><i class="glyphicon glyphicon-log-out"></i> Sair</a></li>
