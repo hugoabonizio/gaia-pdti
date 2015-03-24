@@ -13,7 +13,7 @@ class DB {
 			$conn = "sqlite:db/database.sqlite3";
 		}
     $s = microtime(true);
-		$this->pdo = new PDO($conn, 'ldphxungmtlhvu', 'te9bZEW2Xhemc8EDFsMQ3VbhZt');
+		$this->pdo = new PDO($conn, 'ldphxungmtlhvu', 'te9bZEW2Xhemc8EDFsMQ3VbhZt', array(PDO::ATTR_TIMEOUT => 10, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $e = microtime(true);
